@@ -1,0 +1,41 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #000;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(30px + 2vmin);
+  color: #1ed761;
+  font-family: spotifyMedium;
+}
+
+@font-face {
+  font-family: spotifyMedium;
+  src: url(../public/CircularStd-Medium.otf);
+}
+
+@font-face {
+  font-family: spotifyLight;
+  src: url(../public/CircularStd-Light.otf);
+}
+
+.spotifyButton {
+  background-color: #1ed761;
+  border: none;
+  border-radius: 50%;
+  min-width: 120px;
+  min-height: 120px;
+  font-size: 24px;
+  font-family: spotifyLight;
+  color: white;
+  margin-bottom: 50px;
+}
+
+.spotifyButton:hover {
+  transform: scale(1.1);
+}
