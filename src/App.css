@@ -14,6 +14,17 @@
   font-family: spotifyMedium;
 }
 
+.App-footer {
+  background-color: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(5px + 2vmin);
+  color: #1ed761;
+  font-family: spotifyLight;
+}
+
 @font-face {
   font-family: spotifyMedium;
   src: url(../public/CircularStd-Medium.otf);

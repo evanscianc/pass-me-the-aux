@@ -5,6 +5,7 @@ import axios from "axios";
 function App() {
   const [hitAux, setHitAux] = useState(false);
   const [token, setToken] = useState("");
+  const [songId, setSongId] = useState("38Yamwrtcc9Niupl3kH8pH");
 
   useEffect(() => {
     getToken();
@@ -36,7 +37,6 @@ function App() {
         qs.stringify(data),
         headers
       );
-      console.log(`response.data.access_token: ${response.data.access_token}`);
 
       setToken(response.data.access_token);
       return response.data.access_token;
@@ -46,9 +46,12 @@ function App() {
   };
   /* Spotify TOKEN request code - end */
 
-  /* Spotify API request code */
-  const getSimilar = async () => {
-    const artistId = "3hOdow4ZPmrby7Q1wfPLEy";
+  /* Grab a song */
+  const grabSong = async () => {
+    setHitAux(true);
+    const playlistId = "33dmyEtq8zLFOE264vUDIU";
+    let offset = Math.floor(Math.random() * 150);
+    console.log(`offset: ${offset}`);
 
     try {
       const headers = {
@@ -58,34 +61,32 @@ function App() {
         Authorization: `Bearer ${token}`,
       };
       const { data } = await axios.get(
-        `https://api.spotify.com/v1/artists/${artistId}/related-artists`,
+        `https://api.spotify.com/v1/playlists/${playlistId}/tracks?limit=1&offset=${offset}`,
         { headers }
       );
 
-      // data.artists.forEach(() => console.log(`this.name: ${this.name}`));
+      setSongId(data.items[0].track.id);
 
-      console.log(`data.artists.genres: ${data.artists[2].name}`);
       return data;
     } catch (err) {
       console.log(err);
     }
   };
-  /* Spotify API request code - end */
+  /* Grab a song - end */
+
+  let embedLink = `https://open.spotify.com/embed/track/${songId}`;
 
   return (
     <div className="App">
       <header className="App-header">
         <p>Pass me the aux</p>
-        <button className="spotifyButton" onClick={() => setHitAux(true)}>
+        <button className="spotifyButton" onClick={() => grabSong()}>
           {hitAux ? "Again!" : "Hit it!"}
-        </button>
-        <button className="spotifyButton" onClick={() => getSimilar()}>
-          "test"
         </button>
         {hitAux && (
           <iframe
             title="song"
-            src="https://open.spotify.com/embed/track/38Yamwrtcc9Niupl3kH8pH"
+            src={embedLink}
             width="300"
             height="80"
             frameborder="0"
@@ -94,6 +95,10 @@ function App() {
           ></iframe>
         )}
       </header>
+      <div className="App-footer">
+        <p>A project by @evanscianc</p>
+        {/* <img src="github-logo.png" alt="GitHub" /> */}
+      </div>
     </div>
   );
 }
