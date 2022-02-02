@@ -13,41 +13,19 @@ function App() {
 
   /* Spotify TOKEN request code */
   const axios = require("axios");
-  const qs = require("qs");
-  const getToken = async (
-    clientId = "e6f7d57962df4fd890cdad3a0d3036ac",
-    clientSecret = "c4fe7275e42443a0aafe0d3ace90dc03"
-  ) => {
-    const headers = {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      auth: {
-        username: clientId,
-        password: clientSecret,
-      },
-    };
-    const data = {
-      grant_type: "client_credentials",
-    };
-    try {
-      const response = await axios.post(
-        "https://accounts.spotify.com/api/token",
-        qs.stringify(data),
-        headers
-      );
 
-      setToken(response.data.access_token);
-      return response.data.access_token;
-    } catch (err) {
-      console.log(err);
-    }
+  const getToken = async () => {
+    const url = "https://spotify-proxy-server-heroku.herokuapp.com/auxv1token";
+    fetch(url)
+      .then((response) => response.json())
+      .then((response) => setToken(response.access_token))
+      .catch((err) => console.error("error of " + err));
   };
   /* Spotify TOKEN request code - end */
 
   /* Grab a song */
   const grabSong = async () => {
+    console.log(`token: ${token}`);
     setHitAux(true);
     const playlistId = "33dmyEtq8zLFOE264vUDIU";
     let offset = Math.floor(Math.random() * 150);
@@ -69,6 +47,7 @@ function App() {
 
       return data;
     } catch (err) {
+      getToken(); // Include in case token runs out?
       console.log(err);
     }
   };
