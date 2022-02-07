@@ -1,11 +1,11 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import axios from "axios";
+// import axios from "axios";
 
 function App() {
   const [hitAux, setHitAux] = useState(false);
   const [token, setToken] = useState("");
-  const [songId, setSongId] = useState("38Yamwrtcc9Niupl3kH8pH");
+  const [songId, setSongId] = useState("38Yamwrtcc9Niupl3kH8pH"); // Aries - BOUNTY HUNTER
 
   useEffect(() => {
     getToken();
@@ -26,9 +26,9 @@ function App() {
   /* Grab a song */
   const grabSong = async () => {
     console.log(`token: ${token}`);
-    setHitAux(true);
-    const playlistId = "33dmyEtq8zLFOE264vUDIU";
-    let offset = Math.floor(Math.random() * 150);
+
+    const playlistId = "33dmyEtq8zLFOE264vUDIU"; // kickin it by evanscianc (me)
+    let offset = Math.floor(Math.random() * 150); // 150 songs in my playlist
     console.log(`offset: ${offset}`);
 
     try {
@@ -44,6 +44,7 @@ function App() {
       );
 
       setSongId(data.items[0].track.id);
+      setHitAux(true);
 
       return data;
     } catch (err) {
@@ -57,6 +58,10 @@ function App() {
 
   return (
     <div className="App">
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      ></link>
       <header className="App-header">
         <p>Pass me the aux</p>
         <button className="spotifyButton" onClick={() => grabSong()}>
@@ -75,8 +80,8 @@ function App() {
         )}
       </header>
       <div className="App-footer">
-        <p>A project by @evanscianc</p>
-        {/* <img src="github-logo.png" alt="GitHub" /> */}
+        A project by @evanscianc {"   "} <i className="fa">&#xf09b;</i>{" "}
+        <i className="fa">&#xf08c;</i>
       </div>
     </div>
   );

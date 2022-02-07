@@ -15,14 +15,16 @@
 }
 
 .App-footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
   background-color: #000;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(5px + 2vmin);
+  text-align: center;
+  font-size: calc(4px + 2vmin);
   color: #1ed761;
   font-family: spotifyLight;
+  padding: 10px;
 }
 
 @font-face {
