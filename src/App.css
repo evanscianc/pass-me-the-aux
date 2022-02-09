@@ -14,6 +14,10 @@
   font-family: spotifyMedium;
 }
 
+body {
+  margin: 0;
+}
+
 .App-footer {
   position: fixed;
   left: 0;
@@ -51,4 +55,12 @@
 
 .spotifyButton:hover {
   transform: scale(1.1);
+}
+
+a {
+  color: inherit;
+}
+
+i:hover {
+  transform: scale(1.3);
 }

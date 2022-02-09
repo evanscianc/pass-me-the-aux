@@ -1,6 +1,11 @@
+/*
+ * pass me the aux (V1)
+ * A web app to fetch songs from one of my playlists
+ * Author: Evan Sciancalepore - Feb 9, 2022
+ */
+
 import "./App.css";
 import { useState, useEffect } from "react";
-// import axios from "axios";
 
 function App() {
   const [hitAux, setHitAux] = useState(false);
@@ -23,13 +28,10 @@ function App() {
   };
   /* Spotify TOKEN request code - end */
 
-  /* Grab a song */
+  /* Grab a song from Spotify */
   const grabSong = async () => {
-    console.log(`token: ${token}`);
-
     const playlistId = "33dmyEtq8zLFOE264vUDIU"; // kickin it by evanscianc (me)
     let offset = Math.floor(Math.random() * 150); // 150 songs in my playlist
-    console.log(`offset: ${offset}`);
 
     try {
       const headers = {
@@ -48,11 +50,13 @@ function App() {
 
       return data;
     } catch (err) {
-      getToken(); // Include in case token runs out?
-      console.log(err);
+      console.error(err);
+      if (err.message === "Request failed with status code 401") {
+        getToken(); // 401 Authorization Error - get a new token (lasts for one hour)
+      }
     }
   };
-  /* Grab a song - end */
+  /* Grab a song from Spotify - end */
 
   let embedLink = `https://open.spotify.com/embed/track/${songId}`;
 
@@ -61,7 +65,7 @@ function App() {
       <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-      ></link>
+      />
       <header className="App-header">
         <p>Pass me the aux</p>
         <button className="spotifyButton" onClick={() => grabSong()}>
@@ -73,15 +77,25 @@ function App() {
             src={embedLink}
             width="300"
             height="80"
-            frameborder="0"
+            frameBorder="0"
             allowtransparency="true"
             allow="encrypted-media"
           ></iframe>
         )}
       </header>
       <div className="App-footer">
-        A project by @evanscianc {"   "} <i className="fa">&#xf09b;</i>{" "}
-        <i className="fa">&#xf08c;</i>
+        A project by @evanscianc {"   "}{" "}
+        <a href="https://github.com/evanscianc">
+          <i className="fa">&#xf09b;</i>
+        </a>
+        {"   "}
+        <a href="https://www.linkedin.com/in/evan-sciancalepore-08660a1b4/">
+          <i className="fa">&#xf08c;</i>
+        </a>
+        {"   "}
+        <a href="https://open.spotify.com/playlist/33dmyEtq8zLFOE264vUDIU?si=85fa34c254904c2b">
+          <i className="fa">&#xf1bc;</i>
+        </a>
       </div>
     </div>
   );
