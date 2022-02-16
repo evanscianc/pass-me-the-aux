@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/pass-me-the-aux/static/css/main.ff1ddf7a.css",
+    "main.js": "/pass-me-the-aux/static/js/main.0d9375e0.js",
+    "static/media/CircularStd-Light.otf": "/pass-me-the-aux/static/media/CircularStd-Light.4a1a0bfcc3a53847a945.otf",
+    "static/media/CircularStd-Medium.otf": "/pass-me-the-aux/static/media/CircularStd-Medium.9ffafeddf192e8c8a111.otf",
+    "index.html": "/pass-me-the-aux/index.html",
+    "main.ff1ddf7a.css.map": "/pass-me-the-aux/static/css/main.ff1ddf7a.css.map",
+    "main.0d9375e0.js.map": "/pass-me-the-aux/static/js/main.0d9375e0.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ff1ddf7a.css",
+    "static/js/main.0d9375e0.js"
+  ]
+}
