@@ -1,6 +1,6 @@
 # Pass me the aux
 
-HOSTED AT: [link]
+HOSTED AT: https://evansciancalepore.com/pass-me-the-aux/
 
 It's generally not questioned—if I'm in the car, I'm the one choosing the music. This project was a fun way to display songs from one of my go-to playlists. Keep pressing the big green button, and click the little Spotify icon on the top right corner of the song widget to go check it out in Spotify.
 
