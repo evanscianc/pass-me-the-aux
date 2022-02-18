@@ -53,6 +53,7 @@ function App() {
       console.error(err);
       if (err.message === "Request failed with status code 401") {
         getToken(); // 401 Authorization Error - get a new token (lasts for one hour)
+        grabSong();
       }
     }
   };
