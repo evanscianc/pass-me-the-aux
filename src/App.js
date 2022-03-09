@@ -13,7 +13,7 @@ function App() {
   const [songId, setSongId] = useState("38Yamwrtcc9Niupl3kH8pH"); // Aries - BOUNTY HUNTER
 
   useEffect(() => {
-    // getToken();
+    getToken();
   }, []);
 
   /* Spotify TOKEN request code */
