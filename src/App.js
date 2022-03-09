@@ -11,8 +11,19 @@ function App() {
   const [hitAux, setHitAux] = useState(false);
   const [token, setToken] = useState("");
   const [songId, setSongId] = useState("38Yamwrtcc9Niupl3kH8pH"); // Aries - BOUNTY HUNTER
+  const [loadingIndex, setLoadingIndex] = useState(0);
+
+  const loadingText = [
+    "Greasing gears",
+    "Tuning guitars",
+    "Smashing pianos",
+    "Crying to Frank Ocean",
+    "Watering plants",
+  ];
 
   useEffect(() => {
+    let index = Math.floor(Math.random() * 5);
+    setLoadingIndex(index);
     getToken();
   }, []);
 
@@ -96,7 +107,7 @@ function App() {
               <div></div>
             </div>
           </div>
-          <p>Token loading</p>
+          <p>{loadingText[loadingIndex]}</p>
         </header>
       )}
 
