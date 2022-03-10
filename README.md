@@ -9,3 +9,7 @@ Full playlist link at the bottom (Spotify logo).
 Any and all usage or resemblance to Spotify's graphics is done out of admiration with no commercial intent.
 
 ![image](https://user-images.githubusercontent.com/34558352/154240398-3c6bdaeb-3ccc-4ec7-a1f9-87d35f63066f.png)
+
+## Log:
+
+**3/8/22:** Add a loading indicator while the token is being fetched so that the user can't click the button to no effect.

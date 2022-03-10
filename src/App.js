@@ -11,8 +11,19 @@ function App() {
   const [hitAux, setHitAux] = useState(false);
   const [token, setToken] = useState("");
   const [songId, setSongId] = useState("38Yamwrtcc9Niupl3kH8pH"); // Aries - BOUNTY HUNTER
+  const [loadingIndex, setLoadingIndex] = useState(0);
+
+  const loadingText = [
+    "Greasing gears",
+    "Tuning guitars",
+    "Smashing pianos",
+    "Crying to Frank Ocean",
+    "Watering plants",
+  ];
 
   useEffect(() => {
+    let index = Math.floor(Math.random() * 5);
+    setLoadingIndex(index);
     getToken();
   }, []);
 
@@ -67,23 +78,39 @@ function App() {
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
       />
-      <header className="App-header">
-        <p>Pass me the aux</p>
-        <button className="spotifyButton" onClick={() => grabSong()}>
-          {hitAux ? "Again!" : "Hit it!"}
-        </button>
-        {hitAux && (
-          <iframe
-            title="song"
-            src={embedLink}
-            width="300"
-            height="80"
-            frameBorder="0"
-            allowtransparency="true"
-            allow="encrypted-media"
-          ></iframe>
-        )}
-      </header>
+      {token !== "" ? (
+        <header className="App-header">
+          <p>Pass me the aux</p>
+          <button className="spotifyButton" onClick={() => grabSong()}>
+            {hitAux ? "Again!" : "Hit it!"}
+          </button>
+          {hitAux && (
+            <iframe
+              title="song"
+              src={embedLink}
+              width="300"
+              height="80"
+              frameBorder="0"
+              allowtransparency="true"
+              allow="encrypted-media"
+            ></iframe>
+          )}
+        </header>
+      ) : (
+        <header className="App-header">
+          <div class="loadingio-spinner-ellipsis-boeiszt6ipa">
+            <div class="ldio-15p6k5bcweh">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          </div>
+          <p>{loadingText[loadingIndex]}</p>
+        </header>
+      )}
+
       <div className="App-footer">
         A project by @evanscianc {"   "}{" "}
         <a href="https://github.com/evanscianc">
