@@ -1,17 +1,16 @@
 /*
- * pass me the aux (V1)
+ * pass me the aux (V1) - V2 in progress... 4/21/25
  * A web app to fetch songs from one of my playlists
  * Author: Evan Sciancalepore - Feb 9, 2022
  */
-
-import "./App.css";
-import { useState, useEffect } from "react";
+import "./App.css"
+import { useState, useEffect } from "react"
 
 function App() {
-  const [hitAux, setHitAux] = useState(false);
-  const [token, setToken] = useState("");
-  const [songId, setSongId] = useState("38Yamwrtcc9Niupl3kH8pH"); // Aries - BOUNTY HUNTER
-  const [loadingIndex, setLoadingIndex] = useState(0);
+  const [hitAux, setHitAux] = useState(false)
+  const [token, setToken] = useState("")
+  const [songId, setSongId] = useState("38Yamwrtcc9Niupl3kH8pH") // Aries - BOUNTY HUNTER
+  const [loadingIndex, setLoadingIndex] = useState(0)
 
   const loadingText = [
     "Greasing gears",
@@ -19,58 +18,57 @@ function App() {
     "Smashing pianos",
     "Crying to Frank Ocean",
     "Watering plants",
-  ];
+  ]
 
   useEffect(() => {
-    let index = Math.floor(Math.random() * 5);
-    setLoadingIndex(index);
-    getToken();
-  }, []);
+    let index = Math.floor(Math.random() * 5)
+    setLoadingIndex(index)
+    getToken()
+  }, [])
 
-  /* Spotify TOKEN request code */
-  const axios = require("axios");
+  const axios = require("axios")
 
+  // Get the token
   const getToken = async () => {
-    const url = "https://spotify-proxy-server-heroku.herokuapp.com/auxv1token";
+    const url = "https://spotify-proxy-server.onrender.com/api/token"
     fetch(url)
       .then((response) => response.json())
       .then((response) => setToken(response.access_token))
-      .catch((err) => console.error("error of " + err));
-  };
-  /* Spotify TOKEN request code - end */
+      .catch((err) => console.error("error of " + err))
+  }
 
-  /* Grab a song from Spotify */
+  // Get a song from Spotify
   const grabSong = async () => {
-    const playlistId = "33dmyEtq8zLFOE264vUDIU"; // kickin it by evanscianc (me)
-    let offset = Math.floor(Math.random() * 150); // 150 songs in my playlist
+    const playlistId = "0r6cd5VbVoF4Vyw6jg9wzi" // Because I'm Me by evanscianc (me)
+    const lengthPlaylist = 11 // 11 songs in my playlist
+    let offset = Math.floor(Math.random() * lengthPlaylist)
 
     try {
       const headers = {
         Accept: "application/json",
         "Content-Type": "application/json",
-        // token stored as global variable
         Authorization: `Bearer ${token}`,
-      };
+      }
       const { data } = await axios.get(
         `https://api.spotify.com/v1/playlists/${playlistId}/tracks?limit=1&offset=${offset}`,
         { headers }
-      );
+      )
 
-      setSongId(data.items[0].track.id);
-      setHitAux(true);
+      setSongId(data.items[0].track.id)
+      setHitAux(true)
 
-      return data;
+      return data
     } catch (err) {
-      console.error(err);
+      console.error(err)
       if (err.message === "Request failed with status code 401") {
-        getToken(); // 401 Authorization Error - get a new token (lasts for one hour)
-        grabSong();
+        getToken() // 401 Authorization Error - get a new token (lasts for one hour)
+        grabSong()
       }
     }
-  };
+  }
   /* Grab a song from Spotify - end */
 
-  let embedLink = `https://open.spotify.com/embed/track/${songId}`;
+  let embedLink = `https://open.spotify.com/embed/track/${songId}`
 
   return (
     <div className="App">
@@ -90,7 +88,6 @@ function App() {
               src={embedLink}
               width="300"
               height="80"
-              frameBorder="0"
               allowtransparency="true"
               allow="encrypted-media"
             ></iframe>
@@ -126,7 +123,7 @@ function App() {
         </a>
       </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
